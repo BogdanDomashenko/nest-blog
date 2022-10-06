@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  dev-db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: 'blog'
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: '123'
+    ports:
+      - '5432:5432'
