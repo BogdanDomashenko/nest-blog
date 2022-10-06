@@ -6,7 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../prisma/prisma.service';
 import { SignupDto, SigninDto } from './dto';
-import { AccessToken } from 'src/types';
+import { AccessToken } from '../shared/types';
 
 @Injectable()
 export class AuthService {
@@ -56,6 +56,7 @@ export class AuthService {
       user.id,
       user.email,
       user.username,
+      user.role,
     );
 
     return token;
@@ -65,11 +66,13 @@ export class AuthService {
     id: number,
     email: string,
     username: string,
+    role: string,
   ): Promise<AccessToken> {
     const payload = {
       sub: id,
       email,
       username,
+      role,
     };
 
     const access_token: string = await this.jwt.signAsync(payload, {

@@ -2,7 +2,7 @@ import type { User } from '@prisma/client';
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SigninDto, SignupDto } from './dto';
-import { AccessToken } from 'src/types';
+import { AccessToken } from '../shared/types';
 
 @Controller('auth')
 export class AuthController {
