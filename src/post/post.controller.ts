@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Post,
   Request,
@@ -11,6 +12,7 @@ import { GetUser, Roles } from 'src/auth/decorator';
 import { JwtGuard } from 'src/auth/guard';
 import { RolesGuard } from 'src/auth/guard/roles.guard';
 import { role } from 'src/shared/constants';
+import { DeletePostDto } from './dto/delete-post.dto';
 import { PostDto } from './dto/post.dto';
 import { PostService } from './post.service';
 
@@ -28,5 +30,11 @@ export class PostController {
   @Post('create')
   async create(@Body() dto: PostDto, @GetUser() user: User) {
     return this.postService.create(dto, user);
+  }
+
+  @UseGuards(JwtGuard)
+  @Delete('delete')
+  async delete(@Body() dto: DeletePostDto, @GetUser() user: User) {
+    return this.postService.delete(dto, user);
   }
 }
